@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Expanded(child: Container()),
           Expanded(
-          flex: 2,
+            flex: 2,
             child: Container(
               height: 100,
               child: GridView.builder(
@@ -68,14 +68,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4),
                 itemBuilder: (BuildContext context, int index) {
-                  return MyButton(
-                      buttonText: buttons[index],
-                      color: isOperator(buttons[index])
-                          ? Colors.deepPurple
-                          : Colors.white,
-                      textColor: isOperator(buttons[index])
-                          ? Colors.white
-                          : Colors.deepPurple);
+                  if (index == 0) {
+                    return MyButton(
+                        buttonText: buttons[index],
+                        color: Colors.green,
+                        textColor: Colors.white);
+                  } else if (index == 1) {
+                     return MyButton(
+                        buttonText: buttons[index],
+                        color: Colors.red,
+                        textColor: Colors.white);
+                  } else {
+                    return MyButton(
+                        buttonText: buttons[index],
+                        color: isOperator(buttons[index])
+                            ? Colors.deepPurple
+                            : Colors.white,
+                        textColor: isOperator(buttons[index])
+                            ? Colors.white
+                            : Colors.deepPurple);
+                  }
                 },
               ),
             ),
