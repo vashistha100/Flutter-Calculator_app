@@ -1,3 +1,4 @@
+import 'package:calculator_app/button.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,17 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
@@ -37,8 +30,66 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<String> buttons = [
+    'C',
+    'DEL',
+    '%',
+    '/',
+    '9',
+    '8',
+    '7',
+    'x',
+    '6',
+    '5',
+    '4',
+    '-',
+    '3',
+    '2',
+    '1',
+    '+',
+    '0',
+    '.',
+    'ANS',
+    '=',
+  ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.deepPurple[100],
+      body: Column(
+        children: [
+          Expanded(child: Container()),
+          Expanded(
+          flex: 2,
+            child: Container(
+              height: 100,
+              child: GridView.builder(
+                itemCount: buttons.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4),
+                itemBuilder: (BuildContext context, int index) {
+                  return MyButton(
+                      buttonText: buttons[index],
+                      color: isOperator(buttons[index])
+                          ? Colors.deepPurple
+                          : Colors.white,
+                      textColor: isOperator(buttons[index])
+                          ? Colors.white
+                          : Colors.deepPurple);
+                },
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+bool isOperator(String x) {
+  if (x == '%' || x == 'x' || x == '/' || x == '-' || x == '+' || x == '=') {
+    return true;
+  } else {
+    return false;
   }
 }
