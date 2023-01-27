@@ -15,15 +15,26 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          color: color,
-          child: Center(
-            child: Text(
-              buttonText,
-              style: TextStyle(color: textColor),
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+                color: (Colors.deepPurple[200])!,
+                spreadRadius: 5,
+                blurRadius: 2),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            color: color,
+            child: Center(
+              child: Text(
+                buttonText,
+                style: TextStyle(color: textColor, fontSize: 20),
+              ),
             ),
           ),
         ),
