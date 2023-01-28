@@ -30,8 +30,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var userQuestion = 'question';
-  var userAnswer = 'answer';
+  var userQuestion = '';
+  var userAnswer = '';
   final List<String> buttons = [
     'C',
     'DEL',
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(userQuestion),
+                          child: Text(userQuestion,style:const TextStyle(fontWeight: FontWeight.w400),),
                         )),
                     Container(
                       alignment: Alignment.centerRight,
@@ -86,28 +86,44 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               flex: 2,
               child: Container(
-               
                 width: 360,
                 child: GridView.builder(
                   itemCount: buttons.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     crossAxisSpacing: 11,
-                    
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     if (index == 0) {
                       return MyButton(
+                          buttonTaped: () {
+                            setState(() {
+                              userQuestion = '';
+                            });
+                          },
                           buttonText: buttons[index],
                           color: Colors.green,
                           textColor: Colors.white);
                     } else if (index == 1) {
                       return MyButton(
+                          buttonTaped: () {
+                            setState(() {
+                              if (userQuestion != '') {
+                                userQuestion = userQuestion.substring(
+                                    0, userQuestion.length - 1);
+                              }
+                            });
+                          },
                           buttonText: buttons[index],
                           color: Colors.red,
                           textColor: Colors.white);
                     } else {
                       return MyButton(
+                          buttonTaped: () {
+                            setState(() {
+                              userQuestion += buttons[index];
+                            });
+                          },
                           buttonText: buttons[index],
                           color: isOperator(buttons[index])
                               ? Colors.deepPurple
